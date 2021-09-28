@@ -93,7 +93,7 @@ export default {
       this.reformatArray(this.timeInformationList);
 
       this.chartDataProps = {
-        labels: [ ...Array(this.newArrLength).keys() ].map((i) => i+this.arrStep),
+        labels: [...Array(Math.floor(this.newArrLength/this.arrStep) + 1).keys() ].map((i) => i * this.arrStep),
         datasets: [
           {
             label: "Your half times",
