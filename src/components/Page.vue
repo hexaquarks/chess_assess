@@ -40,6 +40,8 @@ export default {
       timeInformationList: [],
       chartDataProps: {},
       chartOptionProps: {},
+      newArrLength: 0,
+      arrStep: 0
     };
   },
   methods: {
@@ -53,21 +55,51 @@ export default {
       console.log(this.chartDataProps);
       console.log(this.chartOptionProps);
     },
+    reformatArray: function (time) {
+
+      let arrLength = time.length;
+      var step  = 1;
+
+      if(arrLength > 20) {
+        // reduce the array to 20 
+        if(arrLength % 20 === 0) {
+          step = arrLength / 20;
+        } else {
+          var found = 0; 
+          for(var i = 15; i< 25 ;++i)  {
+            if(arrLength % i === 0) {
+              step = arrLength / i;
+              found = 1;
+              break;
+            }
+          }
+          if (found !== 1) {
+            arrLength  -= arrLength % 20
+            step = arrLength / 20;
+          }
+        }
+      }
+      this.newArrLength = arrLength;
+      this.arrStep = step;
+    },
     generateDataArray: function (time, handle) {
       const arr = [];
-      for (var i = 0; i < time.length; i++) {
-        arr.push(time[i][handle]);
+      for (var j = 0; j < this.newArrLength; j += this.arrStep) {
+        arr.push(time[j][handle]);
       }
       return arr;
     },
     generateChartDataProps: function () {
+      this.reformatArray(this.timeInformationList);
+
       this.chartDataProps = {
-        labels: Array.from(Array(this.timeInformationList.length).keys()),
+        labels: [ ...Array(this.newArrLength).keys() ].map((i) => i+this.arrStep),
         datasets: [
           {
             label: "Your half times",
             data: this.generateDataArray(this.timeInformationList, 1),
             backgroundColor: "rgba(54,73,93,.5)",
+            fill: false,
             borderColor: "#36495d",
             borderWidth: 3,
           },
@@ -75,6 +107,7 @@ export default {
             label: "Your opponent's half times",
             data: this.generateDataArray(this.timeInformationList, 2),
             backgroundColor: "rgba(71, 183,132,.5)",
+            fill: "-1",
             borderColor: "#47b784",
             borderWidth: 3,
           },
