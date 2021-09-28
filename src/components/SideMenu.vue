@@ -9,8 +9,14 @@
         <li>Hit <i>Compute</i></li>
       </ul>
     </div>
+    <br>
     <div class="resultsHandles">
       <h1>Results</h1>
+      <ul>
+        <li>User's half time assessment</li>
+        <li>Evolution compared to opponents </li>
+        <li>Evolution compared elo bracket </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -23,9 +29,9 @@ export default {
 
 <style lang="css" scoped>
 .sideMenu {
-  padding: 150px 25px 0px 50px;
+  padding: 150px 25px 0px 75px;
   width: 30%;
-  height: 100vh;
+  height: auto;
   background-color: aliceblue;
   border: 0.05em solid rgb(68, 68, 68);
   background-color: #bababa;
@@ -40,7 +46,7 @@ export default {
 }
 h1 {
     position: relative;
-  font-size: 50px;
+  font-size: clamp(20px,4vw, 45px);
   text-align: left;
   color: #bf7e18;
   font-weight: bolder;
@@ -52,7 +58,7 @@ h1:before{
    border-bottom:6px solid #bf7e18;
    width:20px;
    height:20px;
-   top: calc(50%);
+   top: 30px;
    left: -40px;
    transform: translateY(-50%) rotate(-45deg);
 }
@@ -70,15 +76,20 @@ ul li:before{
    border-bottom:4px solid black;
    width:14px;
    height:14px;
-   top: calc(50% - 4px);
+   top: 40px;
    left: -30px;
    transform: translateY(-50%) rotate(-45deg);
 }
 li {
-  margin-left: 5%;
-  font-size: 30px;
+  margin-left: 3%;
+    font-size: clamp(18px,3vw, 25px);
   color: black;
   font-weight: bolder;
   line-height: 80px;
+}
+.sideMenu br { 
+  color: black;
+  width: 100px; 
+  height: 2px;
 }
 </style>
