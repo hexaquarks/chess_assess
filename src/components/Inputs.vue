@@ -1,41 +1,22 @@
 <template>
-    <div class="input">
-    <h1> Enter your username </h1>
-    <input class="inputField" 
-      type="text" placeholder="User Name" v-model="userName"/>
+  <div class="input">
+    <h1>Enter your username</h1>
+    <input
+      class="inputField"
+      type="text"
+      placeholder="User Name"
+      v-model="userName"
+    />
 
     <div class="options">
       <!-- left panel game modes -->
       <div class="gameModes">
-          
-          <InputItem v-for="(value, index) in gameModesNames"  
-                v-bind:key="index"  
-                v-bind:name="value"
-                v-on:append-gameModes="appendGameModes"
-                />
-         
-        <!-- 
-
-        <div class="blitz3mins">
-          <input
-            type="checkbox"
-            id="Blitz3min"
-            value="Blitz3min"
-            v-model="gameModes"
-          />
-          <label for="Blitz">3 minutes</label>
-        </div>
-
-        <div class="blitz5mins">
-          <input
-            type="checkbox"
-            id="Blitz5min"
-            value="Blitz5min"
-            v-model="gameModes"
-          />
-          <label for="Blitz">5 minutes</label>
-        </div>
-      -->
+        <InputItem
+          v-for="(value, index) in gameModesNames"
+          v-bind:key="index"
+          v-bind:name="value"
+          v-on:append-gameModes="appendGameModes"
+        />
       </div>
 
       <!-- right panel slider modes -->
@@ -53,39 +34,40 @@
 // import VueSlider from 'vue-slider-component'
 import VueSlider from "vue-slider-component";
 import "vue-slider-component/theme/antd.css";
-import fetchData from "../helpers/Fetch.js";
-import InputItem from './InputItem.vue';
+import { fetchData } from "../helpers/Fetch.js";
+import InputItem from "./InputItem.vue";
+import generateBracket from "../helpers/BracketInformation.js";
 
 export default {
-  name: 'Inputs',
+  name: "Inputs",
 
   components: {
     VueSlider,
-    InputItem
+    InputItem,
   },
   methods: {
-      prepareFetchData: async function (event) {
-          const props = {
-              userName: this.userName,
-              gameModes: this.gameModes,
-              max: this.value,
-              rated: true
-          }
-          this.$emit('updateTime', await fetchData(props));
-      },
-      appendGameModes: function (el) {
-       
-        this.gameModes.includes(el) 
-          ? this.gameModes = this.gameModes.filter(e => e !== el) 
-          : this.gameModes.push(el);
-      }
+    prepareFetchData: async function (event) {
+      const props = {
+        userName: this.userName,
+        gameModes: this.gameModes,
+        max: this.value,
+        rated: true,
+      };
+      generateBracket("hapul071",[1750-1950], "blitz");
+      this.$emit("updateTime", await fetchData(props));
+    },
+    appendGameModes: function (el) {
+      this.gameModes.includes(el)
+        ? (this.gameModes = this.gameModes.filter((e) => e !== el))
+        : this.gameModes.push(el);
+    },
   },
   data() {
     return {
       showBlitz: false,
       userName: "",
       gameModes: [],
-      value: 20,
+      value: 50,
       sliderOptions: {
         dotSize: 14,
         width: "5px",
@@ -106,10 +88,10 @@ export default {
         tooltipPlacement: "right",
         tooltipFormatter: void 0,
       },
-      gameModesNames: ["bullet", "blitz", "rapid", "classical" ]
+      gameModesNames: ["bullet", "blitz", "rapid", "classical"],
     };
   },
-}
+};
 </script>
 
 <style>
@@ -123,7 +105,6 @@ export default {
     color: #BF7E18;
     font-weight: bolder;
 }
-
 .input > input {
   background-color: #BABABA;
     width: 60%;
@@ -145,7 +126,6 @@ export default {
   box-sizing: border-box;
    max-width: 800px;
 }
-
 .input::before {
    content: '';
     opacity: 0.049;
@@ -171,7 +151,6 @@ export default {
   flex-direction: row;
   height: auto;
 }
-
 .sliderWrapper {
   display: inline-block;
   justify-items: center;
@@ -186,7 +165,6 @@ export default {
     font-weight: 600;
     color: #BABABA;
 }
-
 #slider {
   margin: 0 auto;
 }
@@ -197,7 +175,6 @@ export default {
   font-size: 20px;
   font-weight: 600;
 }
-
 .inputButton{
     background-color: #262421;
     border: 1px solid rgb(92, 92, 92);

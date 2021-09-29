@@ -1,7 +1,10 @@
 import treatData from './Treatment.js';
-import emitFetchResult from '../components/Inputs.vue';
 
-const fetchData = async (props)  => {
+const arr = [];
+const onMessage = (obj) => arr.push(obj);
+const onComplete = () => console.log("The stream has completed");
+
+export const fetchData = async (props)  => {
   // const {userName, } = props;
   // eslint-disable-next-line no-unused-vars
   let url =  `https://lichess.org/api/games/user/${props.userName}?max=${props.max}&rated=${props.rated}${props.gameModes && seralizeGameModes2(props.gameModes)}&clocks=true&pgnInJson=true`;
@@ -21,17 +24,33 @@ const fetchData = async (props)  => {
     .then(readStream(onMessage))
     .then(onComplete);
   
-    // const results = [];
-    // for(var i = 0 ; i < arr.length ; i++){
-    //   results.push(pgnParser.parse(arr[i].pgn));
-    // }
     console.log(arr)
     const data = treatData(arr, props);
-    // emitFetchResult();
 
     return data;
     
 }
+
+
+export const fetchDataForDatabase = async (props)  => {
+  console.log("i")
+  let url =  `https://lichess.org/api/games/user/${props.userName}?max=100&rated=true&perfType=${props.gameMode}&clocks=true&pgnInJson=true`;
+
+  const response = await fetch(
+    url,
+    {
+      headers: {
+        Accept: "application/x-ndjson",
+      },
+    }
+  )
+    .then(readStream(onMessage))
+    .then(onComplete);
+
+    return arr;
+    
+}
+
 
 const seralizeGameModes2 = (params) => '&perfType='.concat(params.join(","))
 
@@ -65,9 +84,3 @@ const readStream = (processLine) => (response) => {
 
   return loop();
 };
-const arr = [];
-const onMessage = (obj) => arr.push(obj);
-const onComplete = () => console.log("The stream has completed");
-
-
-export default fetchData;
