@@ -11,7 +11,7 @@ const fetchData = async (props)  => {
   console.log(url);
 
   const response = await fetch(
-    url,
+    testingUrl,
     {
       headers: {
         Accept: "application/x-ndjson",
@@ -25,6 +25,7 @@ const fetchData = async (props)  => {
     // for(var i = 0 ; i < arr.length ; i++){
     //   results.push(pgnParser.parse(arr[i].pgn));
     // }
+    console.log(arr)
     const data = treatData(arr, props);
     // emitFetchResult();
 
