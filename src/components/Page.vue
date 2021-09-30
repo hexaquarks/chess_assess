@@ -46,14 +46,11 @@ export default {
   },
   methods: {
     updateTimeDifferential: function (time) {
-      console.log("HERE");
       this.timeDifferential = time[1];
       this.timeInformationList = time[0];
-      console.log(time[0]);
       this.generateChartDataProps();
       this.generateChartOptionProps();
-      console.log(this.chartDataProps);
-      console.log(this.chartOptionProps);
+
     },
     reformatArray: function (time) {
 
@@ -98,17 +95,17 @@ export default {
           {
             label: "Your half times",
             data: this.generateDataArray(this.timeInformationList, 1),
-            backgroundColor: "rgba(54,73,93,.5)",
-            fill: false,
-            borderColor: "#36495d",
+            // backgroundColor: "rgba(54,73,93,.5)",
+            // fill: false,
+            borderColor: "green",
             borderWidth: 3,
           },
           {
             label: "Your opponent's half times",
             data: this.generateDataArray(this.timeInformationList, 2),
-            backgroundColor: "rgba(71, 183,132,.5)",
-            fill: "-1",
-            borderColor: "#47b784",
+            // backgroundColor: "rgba(71, 183,132,.5)",
+            // fill: "-1",
+            borderColor: "red",
             borderWidth: 3,
           },
         ],
@@ -123,6 +120,13 @@ export default {
           filler: {
             propagate: false,
           },
+          legend: {
+            labels: { 
+              font: {
+                size: 24
+              }
+            }
+          }
         },
       };
     },

@@ -53,8 +53,12 @@ export default {
         max: this.value,
         rated: true,
       };
-      generateBracket("hapul071",[1750-1950], "blitz");
+      // generateBracket("physicskush",[1750,1950], "blitz");
+      var startTime = performance.now();
       this.$emit("updateTime", await fetchData(props));
+      var endTime = performance.now();
+      console.log(`time took for data fetching : ${(endTime - startTime)/1000} second`)
+
     },
     appendGameModes: function (el) {
       this.gameModes.includes(el)

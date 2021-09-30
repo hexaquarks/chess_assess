@@ -1,10 +1,11 @@
-import treatData from './Treatment.js';
+import { treatData } from './Treatment.js';
 
-const arr = [];
+let arr = [];
 const onMessage = (obj) => arr.push(obj);
 const onComplete = () => console.log("The stream has completed");
 
 export const fetchData = async (props)  => {
+  arr = [];
   // const {userName, } = props;
   // eslint-disable-next-line no-unused-vars
   let url =  `https://lichess.org/api/games/user/${props.userName}?max=${props.max}&rated=${props.rated}${props.gameModes && seralizeGameModes2(props.gameModes)}&clocks=true&pgnInJson=true`;
@@ -13,8 +14,10 @@ export const fetchData = async (props)  => {
   url.replace(/ /g,'')
   console.log(url);
 
+
+  var startTime = performance.now();
   const response = await fetch(
-    testingUrl,
+    url,
     {
       headers: {
         Accept: "application/x-ndjson",
@@ -23,9 +26,15 @@ export const fetchData = async (props)  => {
   )
     .then(readStream(onMessage))
     .then(onComplete);
+  var endTime = performance.now();
+  console.log(`fetching took ${(endTime - startTime)/1000} seconds`)
   
     console.log(arr)
+
+    startTime = performance.now();
     const data = treatData(arr, props);
+    endTime = performance.now();
+    console.log(`Data treatement took  ${(endTime - startTime)/1000} seconds`)
 
     return data;
     
@@ -33,6 +42,7 @@ export const fetchData = async (props)  => {
 
 
 export const fetchDataForDatabase = async (props)  => {
+  arr = [];
   console.log("i")
   let url =  `https://lichess.org/api/games/user/${props.userName}?max=100&rated=true&perfType=${props.gameMode}&clocks=true&pgnInJson=true`;
 

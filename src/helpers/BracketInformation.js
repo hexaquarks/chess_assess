@@ -7,13 +7,14 @@ let validPlayers = new Set();
 
 
 const generateBracket = async (playerName, eloBracket, gameMode) => {
-    console.log("in the function")
-    console.log("in the function")
+    console.log("IN")
+    // if(validPlayers >= 20) return; 
+
     const fetchProps = {
         userName: playerName,
         gameMode: gameMode
     }
-    console.log(fetchProps)
+    
     const playerData = await fetchDataForDatabase(fetchProps);  
     let currPlayerGames = []; // the current user's valid games (need 25)
     let nextPlayerNames = []; // opponents of current user to check in next reccursion 
@@ -21,7 +22,7 @@ const generateBracket = async (playerName, eloBracket, gameMode) => {
 
     //loop over player's at most 100 games
     for (var i = 0; i < playerData.length; i++) {
-
+        
         if (checkIfGameValid(playerData[i].players.black.rating,
             playerData[i].players.white.rating,
             eloBracket)) {
@@ -35,6 +36,7 @@ const generateBracket = async (playerName, eloBracket, gameMode) => {
 
             if (!checkBerserk(result)) {
                 currPlayerGames.push(result);
+                console.log("added a game :" , result)
             }
             gameCounter++;
         }
@@ -46,11 +48,12 @@ const generateBracket = async (playerName, eloBracket, gameMode) => {
             };
             if(!validPlayers.has(newPlayerObject)) {
                 validPlayers.add(newPlayerObject);
+                console.log("added a player : " , newPlayerObject)
             }
 
             // reccursion here
             for(var j = 0; j < nextPlayerNames.length ;j++){
-                if(validPlayers.size < 100) {
+                if(validPlayers.size < 20) {
                     generateBracket(nextPlayerNames[j], eloBracket)
                 }
             }
@@ -58,7 +61,7 @@ const generateBracket = async (playerName, eloBracket, gameMode) => {
         } 
     }
     console.log(
-        Array.from(validPlayers.values())
+        Array.from(validPlayers.values()), validPlayers.size
       )
 }
 
