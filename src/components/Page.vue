@@ -41,7 +41,7 @@ export default {
       chartDataProps: {},
       chartOptionProps: {},
       newArrLength: 0,
-      arrStep: 0
+      arrStep: 0,
     };
   },
   methods: {
@@ -50,28 +50,26 @@ export default {
       this.timeInformationList = time[0];
       this.generateChartDataProps();
       this.generateChartOptionProps();
-
     },
     reformatArray: function (time) {
-
       let arrLength = time.length;
-      var step  = 1;
+      var step = 1;
 
-      if(arrLength > 20) {
-        // reduce the array to 20 
-        if(arrLength % 20 === 0) {
+      if (arrLength > 20) {
+        // reduce the array to 20
+        if (arrLength % 20 === 0) {
           step = arrLength / 20;
         } else {
-          var found = 0; 
-          for(var i = 15; i< 25 ;++i)  {
-            if(arrLength % i === 0) {
+          var found = 0;
+          for (var i = 15; i < 25; ++i) {
+            if (arrLength % i === 0) {
               step = arrLength / i;
               found = 1;
               break;
             }
           }
           if (found !== 1) {
-            arrLength  -= arrLength % 20
+            arrLength -= arrLength % 20;
             step = arrLength / 20;
           }
         }
@@ -90,7 +88,9 @@ export default {
       this.reformatArray(this.timeInformationList);
 
       this.chartDataProps = {
-        labels: [...Array(Math.floor(this.newArrLength/this.arrStep) + 1).keys() ].map((i) => i * this.arrStep),
+        labels: [
+          ...Array(Math.floor(this.newArrLength / this.arrStep) + 1).keys(),
+        ].map((i) => i * this.arrStep),
         datasets: [
           {
             label: "Your half times",
@@ -117,16 +117,27 @@ export default {
         maintainAspectRatio: true,
         height: "300px",
         plugins: {
+          scales: {
+            xaxis: {
+              fontSize:30
+            },
+            label: {
+              fontSize: 30
+            },
+            scaleLabel: {
+              fontSize: 30,
+            },
+          },
           filler: {
             propagate: false,
           },
           legend: {
-            labels: { 
+            labels: {
               font: {
-                size: 24
-              }
-            }
-          }
+                size: 24,
+              },
+            },
+          },
         },
       };
     },
