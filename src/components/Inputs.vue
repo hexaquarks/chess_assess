@@ -55,8 +55,11 @@ export default {
       };
       // generateBracket("physicskush",[1750,1950], "blitz");
       var startTime = performance.now();
+
+      this.$emit('updateLoading', true);
       this.$emit("updateTime", await fetchData(props));
       var endTime = performance.now();
+      this.$emit('updateLoading', false);
       console.log(`time took for data fetching : ${(endTime - startTime)/1000} second`)
 
     },

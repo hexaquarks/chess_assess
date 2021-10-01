@@ -3,10 +3,14 @@
     <Navbar />
     <SideMenu />
     <div class="mainPanel">
-      <Inputs @updateTime="updateTimeDifferential($event)" />
+      <Inputs 
+        @updateTime="updateTimeDifferential($event)"
+        @updateLoading="updateLoadingLocal($event)"  />
       <Results :timeDifferential="timeDifferential" />
       <div class="chartContainer">
+        <div v-if="loadingState" class="loader"/> 
         <Chart
+          v-if="displayChart && !loadingState"
           :chartdata="chartDataProps"
           :chartOption="chartOptionProps"
           :key="chartOptionProps"
@@ -35,6 +39,8 @@ export default {
   },
   data() {
     return {
+      displayChart: false,
+      loadingState: false,
       barChartData: [12, 19, 3, 5, 2, 3],
       timeDifferential: 0,
       timeInformationList: [],
@@ -45,11 +51,16 @@ export default {
     };
   },
   methods: {
+    updateLoadingLocal: function (data) {
+      this.loadingState = data;
+    },
     updateTimeDifferential: function (time) {
       this.timeDifferential = time[1];
       this.timeInformationList = time[0];
       this.generateChartDataProps();
       this.generateChartOptionProps();
+
+      this.displayChart=true;
     },
     reformatArray: function (time) {
       let arrLength = time.length;
@@ -119,10 +130,10 @@ export default {
         plugins: {
           scales: {
             xaxis: {
-              fontSize:30
+              fontSize: 30,
             },
             label: {
-              fontSize: 30
+              fontSize: 30,
             },
             scaleLabel: {
               fontSize: 30,
@@ -156,12 +167,31 @@ export default {
   height: auto;
 }
 .chartContainer {
-  height: 300px;
   margin: 50px auto 0% auto;
   display: block;
   width: 80%;
   max-width: 825px;
   box-sizing: border-box;
+}
+
+/* loading animation */
+.chartContainer .loader {
+  margin: 0 auto;
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>
 
