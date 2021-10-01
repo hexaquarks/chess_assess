@@ -1,17 +1,15 @@
 <template>
   <div class="navbar">
-    <div class="home" >
-        <!-- home Icon here -->
+    <span> home</span>
+    <div class="push"> 
+      <span> about </span> 
     </div> 
-    <div class="handles" >
-      <span> about </span>
-      <img :src="informationIcon" /> 
-      <span> github </span>
-      <img :src="githubIcon" /> 
-      <span> linkedIn </span>
-      <img :src="linkedinIcon" /> 
-      <!-- about, github linkedin  -->
-    </div> 
+    <img :src="informationIcon" />
+    <span> github </span>
+    <img :src="githubIcon" />
+    <span> linkedIn </span>
+    <img :src="linkedinIcon" />
+    <!-- about, github linkedin  -->
   </div>
 </template>
 
@@ -19,10 +17,10 @@
 export default {
   data() {
     return {
-      githubIcon: require('@/assets/githubOrange.png'), 
-      linkedinIcon: require('@/assets/linkedinIcon.png'),
-      informationIcon: require('@/assets/informationIcon.jpg'),
-    }
+      githubIcon: require("@/assets/githubOrange.png"),
+      linkedinIcon: require("@/assets/linkedinIcon.png"),
+      informationIcon: require("@/assets/informationIcon.jpg"),
+    };
   },
 };
 </script>
@@ -30,25 +28,27 @@ export default {
 <style lang="css">
    .navbar {
        display: flex;
-       justify-content: flex-end;
+       flex-direction: row;
        position: absolute;
        top: 0;
        height: 60px;
        background-color: black;
        width: 100%;
-       align-content: center;
+       align-items: center;
    }
-   .handles{
-     width: auto;
-     /* justify-content: center;
-     align-content: center; */
+   .navbar .push {
+     margin-left: auto;
+     margin-right: 1%;
    }
    span { 
+     font-size: 18px;
      width: fit-content;
      color: aliceblue;
+     margin-right: 1%;
    }
-   .navbar .handles img{
+   .navbar img{
      margin-top: 5px;
      width: 35px; height:35px;
+     margin-right: 2%;
    }
 </style>
