@@ -74,7 +74,7 @@ export default {
       showBlitz: false,
       userName: "",
       gameModes: [],
-      value: 50,
+      value: 40,
       sliderOptions: {
         dotSize: 14,
         width: "5px",
