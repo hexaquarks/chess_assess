@@ -6,7 +6,10 @@
       <Inputs 
         @updateTime="updateTimeDifferential($event)"
         @updateLoading="updateLoadingLocal($event)"  />
-      <Results :timeDifferential="timeDifferential" />
+      <Results 
+        :timeDifferential="timeDifferential" 
+        :key="loadingState"
+        />
       <div class="chartContainer">
         <div v-if="loadingState" class="loader"/> 
         <Chart
@@ -128,17 +131,6 @@ export default {
         maintainAspectRatio: true,
         height: "300px",
         plugins: {
-          scales: {
-            xaxis: {
-              fontSize: 30,
-            },
-            label: {
-              fontSize: 30,
-            },
-            scaleLabel: {
-              fontSize: 30,
-            },
-          },
           filler: {
             propagate: false,
           },

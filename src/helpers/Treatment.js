@@ -18,40 +18,11 @@ export const treatData = (arr, props) => {
 
 
 const calculateTime = (result, props) => {
-  let userColor = "";
-  result.headers[3].value === props.username ? userColor = "white" : userColor = "black";
-
-  // const evenTurn = result.moves.length % 2 === 0;
-  // const userIsWhite = userColor === "white";
-
-  // const userTimeList = [];
-  // const opponentTimeList = [];
-
-  // for (var i = 0; i < result.moves.length; i++) {
-  //   let time = result.moves[i].comments[0].commands[0].values[0];
-  //   userIsWhite ? (i % 2 == 0 ? userTimeList : opponentTimeList).push(time)
-  //     : (i % 2 == 0 ? opponentTimeList : userTimeList).push(time)
-  // }
-
-  // //calculate length of game
-  // let maxTime, whiteTime, blackTime;
 
   let lastTime = result.moves[result.moves.length - 1].comments[0].commands[0].values[0];
   let previousLastTime = result.moves[result.moves.length - 2].comments[0].commands[0].values[0]
   let firstTime = result.moves[0].comments[0].commands[0].values[0]
 
-  // const colors = [whiteTime, blackTime];
-
-  // const index = userIsWhite === evenTurn ? 0 : 1;
-  // maxTime = colors[index] = timeToMinutes(firstTime) - timeToMinutes(lastTime);
-  // colors[1 - index] = timeToMinutes(firstTime) - timeToMinutes(previousLastTime);
-  // // max time is the addition of both times on the clock  :
-  // maxTime = colors[0] + colors[1];
-
-  // console.log("max time :" + maxTime)
-  // console.log("white time :" + colors[0])
-  // console.log("black time :" + colors[1])
-  // -------------
   const firstTimeToMinutes = timeToMinutes(firstTime);
   const maxTime = (firstTimeToMinutes - timeToMinutes(lastTime)) +
     (firstTimeToMinutes - timeToMinutes(previousLastTime));
