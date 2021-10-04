@@ -29,13 +29,14 @@ export default {
 
 <style lang="css" scoped>
 .sideMenu {
-  padding: 150px 25px 0px 75px;
+  padding: 150px 25px 0px 5%;
   width: 30%;
   height: auto;
   background-color: aliceblue;
   border: 0.05em solid rgb(68, 68, 68);
   background-color: #bababa;
 }
+
 .informationHandles,
 .resultsHandles {
   width: 100%;
@@ -46,7 +47,7 @@ export default {
 }
 h1 {
     position: relative;
-  font-size: clamp(20px,4vw, 45px);
+  font-size: clamp(2vw,3vw, 45px);
   text-align: left;
   color: #bf7e18;
   font-weight: bolder;
@@ -63,6 +64,7 @@ h1:before{
    transform: translateY(-50%) rotate(-45deg);
 }
 ul {
+  line-height: 30px;
   list-style: none;
 }
 ul li {
@@ -76,20 +78,28 @@ ul li:before{
    border-bottom:4px solid black;
    width:14px;
    height:14px;
-   top: 40px;
+   top: 15px;
    left: -30px;
    transform: translateY(-50%) rotate(-45deg);
 }
 li {
+  margin-bottom: 60px;
+  overflow: wrap;
   margin-left: 3%;
-    font-size: clamp(18px,3vw, 25px);
+  font-size: clamp(1.6vw,2.4vw, 30px);
   color: black;
   font-weight: bolder;
-  line-height: 80px;
 }
 .sideMenu br { 
   color: black;
   width: 100px; 
   height: 2px;
 }
+
+/* @media only screen and (max-width: 1200px) {
+  .sideMenu{
+    display: none;
+  }
+} */
+
 </style>
