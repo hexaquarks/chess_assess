@@ -8,10 +8,12 @@
         @updateLoading="updateLoadingLocal($event)"  />
       <Results 
         :timeDifferential="timeDifferential" 
-        :key="loadingState"
+        :loadingStateResult="loadingState"
+        v-bin="loadingState"
         />
       <div class="chartContainer">
-        <div v-if="loadingState" class="loader"/> 
+        <!-- <div v-if="loadingState" class="loaderInformation"/>  -->
+        <div v-if="loadingState" class="loaderChart"/> 
         <Chart
           v-if="displayChart && !loadingState"
           :chartdata="chartDataProps"
@@ -159,6 +161,7 @@ export default {
   height: auto;
 }
 .chartContainer {
+  position: relative;
   margin: 50px auto 0% auto;
   display: block;
   width: 80%;
@@ -167,14 +170,26 @@ export default {
 }
 
 /* loading animation */
-.chartContainer .loader {
-  margin: 0 auto;
+.chartContainer .loaderChart, 
+.chartContainer .loaderInformation {
+  position: absolute;
+  margin: 3% auto 0 43%;
   border: 16px solid #f3f3f3;
   border-top: 16px solid #3498db;
   border-radius: 50%;
   width: 36px;
   height: 36px;
   animation: spin 2s linear infinite;
+}
+
+.chartContainer .loaderInformation {
+  position:absolute; 
+  margin: unset;
+  bottom:210px; 
+  left: 44%;
+}
+.chartContainer .loaderChart{
+  margin-top: 20%;
 }
 
 @keyframes spin {

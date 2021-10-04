@@ -1,9 +1,9 @@
 <template>
   <div class="results">
+      <div v-if="loadingStateResult" class="loader" />
     <div class="messageContainer">
       <img :src="positiveTimeDifferential ? imageGood : imageNormal" />
-      <h2 v-if="displayMessage && !loadingState">{{ message }}</h2>
-      <div v-if="loadingState" class="loader" />
+      <h2 >{{ message }}</h2>
     </div>
   </div>
 </template>
@@ -12,11 +12,12 @@
 export default {
   props: {
     timeDifferential: String,
+    loadingStateResult: Boolean
   },
   data() {
     return {
-      displayMessage: false,
-      loadingState: false,
+      // displayMessage: false,
+      // loadingState: false,
       imageNormal: require("@/assets/informationIcon.jpg"),
       imageGood: require("@/assets/checkMark.png"),
       message: "",
@@ -71,6 +72,7 @@ export default {
 
 <style lang="css">
 .results {
+  position: relative;
   width: 80%; /*1200 px at 51%*/
   height: auto;
   /* max-width: 800px; */
@@ -104,8 +106,10 @@ img {
   /* height: 100%; */
 }
 
-.messageContainer .loader {
-  margin: 0 auto;
+.results .loader {
+  
+  position: absolute;
+  margin: 3% auto 0 43%;
   border: 16px solid #f3f3f3;
   border-top: 16px solid #3498db;
   border-radius: 50%;
