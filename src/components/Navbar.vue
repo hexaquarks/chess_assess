@@ -1,13 +1,13 @@
 <template>
   <div class="navbar">
-    <span> home</span>
+    <span class="home"> <a> home </a></span>
     <div class="push"> 
-      <span> about </span> 
+      <span> <a>about</a> </span> 
     </div> 
     <img :src="informationIcon" />
-    <span> github </span>
+    <span><a href="https://github.com/hexaquarks/chess_assess" target="_blank"> github</a>  </span>
     <img :src="githubIcon" />
-    <span> linkedIn </span>
+    <span> <a href="https://www.linkedin.com/in/mihail-anghelici-85196a20a" target="_blank"> linkedIn</a>  </span>
     <img :src="linkedinIcon" />
     <!-- about, github linkedin  -->
   </div>
@@ -40,8 +40,11 @@ export default {
      margin-left: auto;
      margin-right: 1%;
    }
+   .navbar .home {
+     margin-left: 2%;
+   }
    span { 
-     font-size: 18px;
+     font-size: 24px;
      width: fit-content;
      color: aliceblue;
      margin-right: 1%;
@@ -50,5 +53,10 @@ export default {
      margin-top: 5px;
      width: 35px; height:35px;
      margin-right: 2%;
+   }
+   a{
+     color: aliceblue;
+     text-decoration: none;
+     
    }
 </style>

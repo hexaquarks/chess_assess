@@ -107,7 +107,6 @@ img {
 }
 
 .results .loader {
-  
   position: absolute;
   margin: 3% auto 0 43%;
   border: 16px solid #f3f3f3;
