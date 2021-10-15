@@ -9,6 +9,6 @@ cd dist
 git init
 git add -A 
 git commit -m "Website deployement"
-git push -f https://hexaquarks.github.io/chess_assess.git main:gh-pages
+git push -f git@github.com:hexaquarks/hexaquarks.github.io.git master
 
 cd -
