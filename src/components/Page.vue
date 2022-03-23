@@ -111,16 +111,12 @@ export default {
           {
             label: "Your half times",
             data: this.generateDataArray(this.timeInformationList, 1),
-            // backgroundColor: "rgba(54,73,93,.5)",
-            // fill: false,
             borderColor: "green",
             borderWidth: 3,
           },
           {
             label: "Your opponent's half times",
             data: this.generateDataArray(this.timeInformationList, 2),
-            // backgroundColor: "rgba(71, 183,132,.5)",
-            // fill: "-1",
             borderColor: "red",
             borderWidth: 3,
           },
